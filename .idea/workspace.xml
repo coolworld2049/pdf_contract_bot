@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_blame.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/pdf_contract_bot.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/__main__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/assets/electronic_signature_badge.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/assets/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/assets/sig.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/assets/sig_transparent.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/assets/stamp_mockup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/AUTHORS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/COPYING" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/CREDITS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/ChangeLog" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSans.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBold.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBoldOblique.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBoldOblique.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansOblique.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansOblique.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/INSTALL" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/font/freesans/README" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/loguru_logger.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bot/pdf/invoice_agreement_supply_of_goods_N_28955336.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2kNIIAdCCDdwvx9UA3zBfYD7ZFJ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.__main__.executor": "Run",
+    "Python.loguru_logger.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\coolw\PycharmProjects\pdf_contract_bot\bot" />
+      <recent name="C:\Users\coolw\PycharmProjects\pdf_contract_bot\pdf" />
+      <recent name="C:\Users\coolw\PycharmProjects\pdf_contract_bot\assets" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="__main__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pdf_contract_bot" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/bot" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bot/__main__.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.__main__" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-975db3bf15a3-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.18034.82" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="" />
+      <created>1723117524742</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1723117524742</updated>
+    </task>
+    <servers />
+  </component>
+</project>
