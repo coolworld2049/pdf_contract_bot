@@ -29,8 +29,7 @@ class Settings(BaseSettings):
     redis_host: str = "localhost"
     redis_port: int = 6379
     log_level: str = "INFO"
-    chat_id: int = 383284697
-    test_user_id: int = None
+    test_user_id: int | None = None
     model_config = SettingsConfigDict(
         env_file=pathlib.Path(__file__).parent.parent.joinpath(".env"),
         case_sensitive=False,

@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="add test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/tests/test_generate_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/tests/test_generate_pdf.py" afterDir="false" />
-    </list>
+    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="fix file gen" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -198,10 +194,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.__main__" />
-        <item itemvalue="Python tests.Python tests for test_generate_pdf.test_generate_pdf" />
-        <item itemvalue="Python.test_generate_pdf" />
-        <item itemvalue="Docker.docker-compose.yml.bot: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.bot: Compose Deployment" />
+        <item itemvalue="Python.__main__" />
+        <item itemvalue="Python tests.Python tests for test_generate_pdf.test_generate_pdf" />
       </list>
     </recent_temporary>
   </component>
@@ -245,13 +241,38 @@
       <option name="project" value="LOCAL" />
       <updated>1723124363310</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix file gen">
+      <option name="closed" value="true" />
+      <created>1723126515848</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723126515848</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix file gen">
+      <option name="closed" value="true" />
+      <created>1723126590656</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723126590656</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix file gen">
+      <option name="closed" value="true" />
+      <created>1723126632989</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723126632989</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="dockerize" />
     <MESSAGE value="add test" />
-    <option name="LAST_COMMIT_MESSAGE" value="add test" />
+    <MESSAGE value="fix file gen" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix file gen" />
   </component>
 </project>
