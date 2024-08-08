@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  bot:
+    build:
+      context: .
+    restart: on-failure
+    command: poetry run python -m bot
+    stop_signal: SIGINT
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+    env_file:
+      - .env
+  redis:
+    image: redis/redis-stack-server
+    restart: on-failure
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+volumes:
+  redis-data:

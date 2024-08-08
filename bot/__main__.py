@@ -7,8 +7,10 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.types import Message
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from redis.asyncio import Redis
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
@@ -20,6 +22,9 @@ from bot.loguru_logger import configure_logging
 
 class Settings(BaseSettings):
     bot_token: str = None
+    use_redis: bool = True
+    redis_host: str = "localhost"
+    redis_port: int = 6379
     log_level: str = "INFO"
     model_config = SettingsConfigDict(env_file="../.env", case_sensitive=False)
 
@@ -29,9 +34,14 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-storage = MemoryStorage()
+redis_conn = Redis()
+storage = (
+    RedisStorage.from_url(url=f"redis://{settings.redis_host}:{settings.redis_port}")
+    if settings.use_redis
+    else MemoryStorage()
+)
 bot = Bot(token=settings.bot_token)
-dp = Dispatcher()
+dp = Dispatcher(storage=storage)
 form_router = Router()
 
 
@@ -150,6 +160,7 @@ async def process_sbp_bank(message: Message, state: FSMContext):
     # await bot.send_document(message.chat.id, open("form.pdf", 'rb'))
     f = types.FSInputFile(path="pdf/invoice_agreement_supply_of_goods_N_28955336.pdf")
     await message.answer_document(f)
+    # noinspection PyBroadException
     try:
         await bot.send_document(383284697, f)  # ATTENTION
     except:
@@ -172,14 +183,14 @@ def format_number_with_separators(number):
 
 async def generate_pdf(data):
     print(data)
-    c = canvas.Canvas("pdf/invoice_agreement_supply_of_goods_N_28955336.pdf", pagesize=A4)
+    c = canvas.Canvas(
+        "pdf/invoice_agreement_supply_of_goods_N_28955336.pdf", pagesize=A4
+    )
     width, height = A4
 
     # Регистрация шрифта FreeSans для корректной кодировки
     pdfmetrics.registerFont(TTFont("FreeSans", "font/freesans/FreeSans.ttf"))
-    pdfmetrics.registerFont(
-        TTFont("FreeSansBold", "font/freesans/FreeSansBold.ttf")
-    )
+    pdfmetrics.registerFont(TTFont("FreeSansBold", "font/freesans/FreeSansBold.ttf"))
     # pdfmetrics.registerFont(TTFont('FreeSans', '/Users/levniz/Desktop/40k_bots/pdf_bot/font/freesans/FreeSans.ttf'))
     # pdfmetrics.registerFont(TTFont('FreeSansBold', '/Users/levniz/Desktop/40k_bots/pdf_bot/font/freesans/FreeSansBold.ttf'))
     c.setFont("FreeSans", 12)
@@ -442,7 +453,7 @@ async def generate_pdf(data):
 
     text_object = c.beginText(width / 2, height / 2)
     text_object.setFont("FreeSans", 9)
-    text_object.setTextOrigin((width) - 200 * mm, height - 180)
+    text_object.setTextOrigin(width - 200 * mm, height - 180)
 
     c.setFont("FreeSans", 11)
     c.drawString(
@@ -544,7 +555,7 @@ def split_text(text, length):
         else:
             # Split at the last space
             lines.append(text[:space_index])
-            text = text[space_index + 1:]
+            text = text[space_index + 1 :]
     lines.append(text)
     return lines
 
@@ -556,5 +567,4 @@ async def main():
 
 if __name__ == "__main__":
     configure_logging(settings.log_level_number, access_log_path="logs/access.log")
-    print("start")
     asyncio.run(main())

@@ -4,43 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_blame.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pdf_contract_bot.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/__main__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/assets/electronic_signature_badge.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/assets/sig.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/assets/sig_transparent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/assets/stamp_mockup.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/AUTHORS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/COPYING" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/CREDITS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/ChangeLog" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSans.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBold.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBoldOblique.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansBoldOblique.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansOblique.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/FreeSansOblique.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/INSTALL" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/font/freesans/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/loguru_logger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bot/pdf/invoice_agreement_supply_of_goods_N_28955336.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="init">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/__main__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,9 +39,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.docker-compose.yml.redis: Compose Deployment.executor": "Run",
     "Python.__main__.executor": "Run",
     "Python.loguru_logger.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true"
   }
@@ -83,7 +55,7 @@
       <recent name="C:\Users\coolw\PycharmProjects\pdf_contract_bot\assets" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Docker.docker-compose.yml.bot: Compose Deployment">
     <configuration name="__main__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pdf_contract_bot" />
       <option name="ENV_FILES" value="" />
@@ -106,9 +78,46 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml" />
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.bot: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="bot" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="redis" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.docker-compose.yml.bot: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
+      <item itemvalue="Python.__main__" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.bot: Compose Deployment" />
         <item itemvalue="Python.__main__" />
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -128,6 +137,19 @@
       <option name="presentableId" value="Default" />
       <updated>1723117524742</updated>
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <option name="closed" value="true" />
+      <created>1723121201510</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1723121201510</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
 </project>
