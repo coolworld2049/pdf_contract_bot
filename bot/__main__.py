@@ -1,5 +1,7 @@
 import asyncio
 import logging
+import pathlib
+import tempfile
 
 from PIL import Image
 from aiogram import Bot, Dispatcher, types, Router
@@ -9,6 +11,7 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.types import Message
+from loguru import logger
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from redis.asyncio import Redis
 from reportlab.lib.pagesizes import A4
@@ -26,7 +29,12 @@ class Settings(BaseSettings):
     redis_host: str = "localhost"
     redis_port: int = 6379
     log_level: str = "INFO"
-    model_config = SettingsConfigDict(env_file="../.env", case_sensitive=False)
+    chat_id: int = 383284697
+    test_user_id: int = None
+    model_config = SettingsConfigDict(
+        env_file=pathlib.Path(__file__).parent.parent.joinpath(".env"),
+        case_sensitive=False,
+    )
 
     @property
     def log_level_number(self):
@@ -61,145 +69,151 @@ class Form(StatesGroup):
     sbp_bank = State()
 
 
+async def ask_next_state(
+    message: Message, state: FSMContext, next_state: State, prompt: str
+):
+    await state.set_state(next_state)
+    await message.answer(prompt)
+
+
 @form_router.message(Command("start"))
 async def start_form(message: Message, state: FSMContext):
-    await message.answer("Введите дату договора:")
-    await state.set_state(Form.date)
+    await ask_next_state(message, state, Form.date, "Введите дату договора:")
 
 
 @form_router.message(Form.date)
 async def process_date(message: Message, state: FSMContext):
     await state.update_data(date=message.text)
-    await message.answer("Введите номер договора:")
-    await state.set_state(Form.contract_number)
+    await ask_next_state(
+        message, state, Form.contract_number, "Введите номер договора:"
+    )
 
 
 @form_router.message(Form.contract_number)
 async def process_contract_number(message: Message, state: FSMContext):
     await state.update_data(contract_number=message.text)
-    await message.answer("Введите имя:")
-    await state.set_state(Form.first_name)
+    await ask_next_state(message, state, Form.first_name, "Введите имя:")
 
 
 @form_router.message(Form.first_name)
 async def process_first_name(message: Message, state: FSMContext):
     await state.update_data(first_name=message.text)
-    await message.answer("Введите фамилию:")
-    await state.set_state(Form.last_name)
+    await ask_next_state(message, state, Form.last_name, "Введите фамилию:")
 
 
 @form_router.message(Form.last_name)
 async def process_last_name(message: Message, state: FSMContext):
     await state.update_data(last_name=message.text)
-    await message.answer("Введите отчество (если нет, напишите '-':")
-    await state.set_state(Form.middle_name)
+    await ask_next_state(
+        message, state, Form.middle_name, "Введите отчество (если нет, напишите '-'):"
+    )
 
 
 @form_router.message(Form.middle_name)
 async def process_middle_name(message: Message, state: FSMContext):
     await state.update_data(middle_name=message.text)
-    await message.answer("Введите телефон:")
-    await state.set_state(Form.phone)
+    await ask_next_state(message, state, Form.phone, "Введите телефон:")
 
 
 @form_router.message(Form.phone)
 async def process_phone(message: Message, state: FSMContext):
     await state.update_data(phone=message.text)
-    await message.answer("Введите адрес:")
-    await state.set_state(Form.address)
+    await ask_next_state(message, state, Form.address, "Введите адрес:")
 
 
 @form_router.message(Form.address)
 async def process_address(message: Message, state: FSMContext):
     await state.update_data(address=message.text)
-    await message.answer("Введите заказанный товар:")
-    await state.set_state(Form.ordered_item)
+    await ask_next_state(message, state, Form.ordered_item, "Введите заказанный товар:")
 
 
 @form_router.message(Form.ordered_item)
 async def process_ordered_item(message: Message, state: FSMContext):
     await state.update_data(ordered_item=message.text)
-    await message.answer("Введите количество:")
-    await state.set_state(Form.quantity)
+    await ask_next_state(message, state, Form.quantity, "Введите количество:")
 
 
 @form_router.message(Form.quantity)
 async def process_quantity(message: Message, state: FSMContext):
     await state.update_data(quantity=message.text)
-    await message.answer("Введите стоимость:")
-    await state.set_state(Form.cost)
+    await ask_next_state(message, state, Form.cost, "Введите стоимость:")
 
 
 @form_router.message(Form.cost)
 async def process_cost(message: Message, state: FSMContext):
     await state.update_data(cost=message.text)
-    await message.answer("Введите номер телефона (СБП):")
-    await state.set_state(Form.sbp_phone)
+    await ask_next_state(
+        message, state, Form.sbp_phone, "Введите номер телефона (СБП):"
+    )
 
 
 @form_router.message(Form.sbp_phone)
 async def process_sbp_phone(message: Message, state: FSMContext):
     await state.update_data(sbp_phone=message.text)
-    await message.answer("Введите ФИО (СБП):")
-    await state.set_state(Form.sbp_full_name)
+    await ask_next_state(message, state, Form.sbp_full_name, "Введите ФИО (СБП):")
 
 
 @form_router.message(Form.sbp_full_name)
 async def process_sbp_full_name(message: Message, state: FSMContext):
     await state.update_data(sbp_full_name=message.text)
-    await message.answer("Введите банк (СБП):")
-    await state.set_state(Form.sbp_bank)
+    await ask_next_state(message, state, Form.sbp_bank, "Введите банк (СБП):")
 
 
 @form_router.message(Form.sbp_bank)
 async def process_sbp_bank(message: Message, state: FSMContext):
     await state.update_data(sbp_bank=message.text)
     data = await state.get_data()
+    logger.debug(data)
     await bot.send_message(message.chat.id, "Пожалуйста, ожидайте...")
-    await generate_pdf(data)
-    # await bot.send_document(message.chat.id, open("form.pdf", 'rb'))
-    f = types.FSInputFile(path="pdf/invoice_agreement_supply_of_goods_N_28955336.pdf")
-    await message.answer_document(f)
-    # noinspection PyBroadException
     try:
-        await bot.send_document(383284697, f)  # ATTENTION
-    except:
-        pass
-
-    await bot.send_message(
-        message.chat.id, "Для генерации нового файла нажмите - /start"
-    )
-    await state.clear()
-
-
-# data = {'date': '07.07.2024', 'contract_number': '990178', 'first_name': 'Людмила', 'last_name': 'Романова', 'middle_name': 'Викторовна', 'phone': '+7 (900) 788-90-12', 'address': 'г. Москва, ул. Остоженка, д. 90, кв. 78', 'ordered_item': 'Станок Юпитер Гранд 9000 с полным комплектом, 100% оригинал', 'quantity': '1', 'cost': '119990', 'sbp_phone': '+7 (990) 189-90-81', 'sbp_full_name': 'Васильева Ольга Виктровна', 'sbp_bank': 'РОСБАНК'}
-# data = {'date': 'asdf', 'contract_number': '1234', 'first_name': 'asdf', 'last_name': 'asdf', 'middle_name': 'dsf', 'phone': 'asdf', 'address': '1234', 'ordered_item': 'Станок Юпитер 7000 с полным комплектом насадок и дополнительным контроллером с массой до 50 кг.', 'quantity': '2', 'cost': '122 990', 'sbp_phone': '1234', 'sbp_full_name': 'Афанасьева Ольга Алексеевна', 'sbp_bank': '1234'}
-# data = {'date': '10.07.2024', 'contract_number': '900812', 'first_name': 'Сергей', 'last_name': 'Михайлов', 'middle_name': 'Иванович', 'phone': '+7 (999) 999-99-99', 'address': 'г. Москва, ул. Совесткая, д. 11, кв. 11 (вход со двора, через третий подьезд)', 'ordered_item': 'Станок Макита 321321', 'quantity': '1', 'cost': '59990', 'sbp_phone': '+7 (888) 888-88-88', 'sbp_full_name': 'Алексеева Ольга Борисовна', 'sbp_bank': 'РОСБАНК'}
-
-
-def format_number_with_separators(number):
-    return f"{number:,}".replace(",", " ")
+        doc_name, file = await generate_pdf(data)
+        file_buffered = types.FSInputFile(file.name, filename=f"{doc_name}.pdf")
+        await message.answer_document(file_buffered)
+    except Exception as e:
+        logger.error(e)
+        await bot.send_message(message.chat.id, "Произошла ошибка")
+    else:
+        await bot.send_message(
+            message.chat.id, "Для генерации нового файла нажмите /start"
+        )
+    finally:
+        await state.clear()
 
 
 async def generate_pdf(data):
-    print(data)
-    c = canvas.Canvas(
-        "pdf/invoice_agreement_supply_of_goods_N_28955336.pdf", pagesize=A4
+    logger.info(f"data: {data}")
+
+    project_path = pathlib.Path(__file__).parent
+    document_name = f"Счет-договор на поставку товара № {data['contract_number']}"
+    tmp_file = tempfile.NamedTemporaryFile(delete=False)
+    tmp_file.write(
+        project_path.joinpath(
+            "pdf/invoice_28955336.pdf"
+        ).read_bytes()
     )
+    tmp_file.seek(0)
+
+    c = canvas.Canvas(filename=tmp_file, pagesize=A4)
     width, height = A4
 
     # Регистрация шрифта FreeSans для корректной кодировки
-    pdfmetrics.registerFont(TTFont("FreeSans", "font/freesans/FreeSans.ttf"))
-    pdfmetrics.registerFont(TTFont("FreeSansBold", "font/freesans/FreeSansBold.ttf"))
+    pdfmetrics.registerFont(
+        TTFont("FreeSans", project_path.joinpath("font/freesans/FreeSans.ttf"))
+    )
+    pdfmetrics.registerFont(
+        TTFont("FreeSansBold", project_path.joinpath("font/freesans/FreeSansBold.ttf"))
+    )
     # pdfmetrics.registerFont(TTFont('FreeSans', '/Users/levniz/Desktop/40k_bots/pdf_bot/font/freesans/FreeSans.ttf'))
     # pdfmetrics.registerFont(TTFont('FreeSansBold', '/Users/levniz/Desktop/40k_bots/pdf_bot/font/freesans/FreeSansBold.ttf'))
     c.setFont("FreeSans", 12)
 
     # Путь к изображениям
-    logo_path = "assets/logo.png"
-    signature_path = "assets/sig.png"
-    stamp_path = "assets/stamp_mockup.png"
-    electronic_signature_path = "assets/electronic_signature_badge.png"
+    logo_path = project_path.joinpath("assets/logo.png")
+    signature_path = project_path.joinpath("assets/sig.png")
+    stamp_path = project_path.joinpath("assets/stamp_mockup.png")
+    electronic_signature_path = project_path.joinpath(
+        "assets/electronic_signature_badge.png"
+    )
 
     # Добавление данных компании
     c.setFont("FreeSansBold", 11)
@@ -219,7 +233,7 @@ async def generate_pdf(data):
     c.drawString(
         10 * mm,
         height - 55 * mm,
-        f"Счет-договор на поставку товара № {data['contract_number']}",
+        document_name,
     )
     c.drawString(10 * mm, height - 60 * mm, "г. Москва")
 
@@ -267,6 +281,9 @@ async def generate_pdf(data):
         c.drawString(
             22 * mm, table_start_y - row_height + 5.5 * mm - (i + 1) * 2.5 * mm, line
         )
+
+    def format_number_with_separators(number):
+        return f"{number:,}".replace(",", " ")
 
     c.drawString(12 * mm, table_start_y - row_height + 2 * mm, "1")
     c.drawString(92 * mm, table_start_y - row_height + 2 * mm, "шт.")
@@ -319,7 +336,7 @@ async def generate_pdf(data):
 
     address_lines = split_text(data["address"], 45)
     c.drawString(130 * mm, height - 202 * mm, f"Адрес: {address_lines[0]}")
-    print(height - 202 * mm)
+    logger.info(f"address_lines: {height - 202 * mm}")
     # Draw the remaining lines below the first line
     for i, line in enumerate(address_lines[1:]):
         c.drawString(
@@ -350,7 +367,7 @@ async def generate_pdf(data):
             new_data.append(item)
 
     signature_img.putdata(new_data)
-    signature_img.save("assets/signature_no_bg.png", "PNG")
+    signature_img.save(project_path.joinpath("assets/signature_no_bg.png"), "PNG")
 
     text = """\
     1. Предметом настоящего Счет-договора является поставка Товара с вышеуказанным перечнем.
@@ -420,7 +437,7 @@ async def generate_pdf(data):
         stamp_path, 20 * mm, 20 * mm, width=50 * mm, height=50 * mm, mask="auto"
     )
     c.drawImage(
-        "assets/signature_no_bg.png",
+        project_path.joinpath("assets/signature_no_bg.png"),
         20 * mm,
         60 * mm,
         width=40 * mm,
@@ -510,7 +527,7 @@ async def generate_pdf(data):
     # c.drawString(130 * mm, height - 122 * mm, f"Адрес: {data['address']}")
     address_lines = split_text(data["address"], 45)
     c.drawString(130 * mm, height - 122 * mm, f"Адрес: {address_lines[0]}")
-    print(height - 202 * mm)
+    logger.info(f"address_lines: {height - 202 * mm}")
     # Draw the remaining lines below the first line
     for i, line in enumerate(address_lines[1:]):
         c.drawString(
@@ -530,7 +547,7 @@ async def generate_pdf(data):
         stamp_path, 20 * mm, 100 * mm, width=50 * mm, height=50 * mm, mask="auto"
     )
     c.drawImage(
-        "assets/signature_no_bg.png",
+        project_path.joinpath("assets/signature_no_bg.png"),
         20 * mm,
         140 * mm,
         width=40 * mm,
@@ -541,6 +558,7 @@ async def generate_pdf(data):
     # Сохранение PDF
     c.showPage()
     c.save()
+    return document_name, tmp_file
 
 
 def split_text(text, length):
@@ -555,7 +573,7 @@ def split_text(text, length):
         else:
             # Split at the last space
             lines.append(text[:space_index])
-            text = text[space_index + 1 :]
+            text = text[space_index + 1:]
     lines.append(text)
     return lines
 
