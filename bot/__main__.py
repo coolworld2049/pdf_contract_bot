@@ -5,7 +5,6 @@ import tempfile
 
 from PIL import Image
 from aiogram import Bot, Dispatcher, types, Router
-from aiogram.enums import ParseMode
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
@@ -30,6 +29,8 @@ class Settings(BaseSettings):
     redis_host: str = "localhost"
     redis_port: int = 6379
     log_level: str = "INFO"
+    chat_id: int = 383284697
+    test_user_id: int = None
     model_config = SettingsConfigDict(
         env_file=pathlib.Path(__file__).parent.parent.joinpath(".env"),
         case_sensitive=False,
@@ -160,45 +161,38 @@ async def process_sbp_full_name(message: Message, state: FSMContext):
 
 @form_router.message(Form.sbp_bank)
 async def process_sbp_bank(message: Message, state: FSMContext):
-    data = await state.get_data()
-    await message.answer("Пожалуйста, ожидайте...")
-    await generate_pdf(data)
-    pdf_file = types.FSInputFile(path="pdf/invoice_28955336.pdf")
-    await message.answer_document(pdf_file)
-    await bot.send_message(
-        message.chat.id, "Для генерации нового файла нажмите - /start"
-    )
-    await state.clear()
-
-
-@form_router.message(Form.sbp_bank)
-async def process_sbp_bank(message: Message, state: FSMContext):
     await state.update_data(sbp_bank=message.text)
     data = await state.get_data()
+    logger.debug(data)
     await bot.send_message(message.chat.id, "Пожалуйста, ожидайте...")
-    await generate_pdf(data)
-    f = types.FSInputFile(path="pdf/invoice_28955336.pdf")
-    await message.answer_document(f)
     try:
-        await bot.send_document(383284697, f)
+        doc_name, file = await generate_pdf(data)
+        file_buffered = types.FSInputFile(file.name, filename=f"{doc_name}.pdf")
+        await message.answer_document(file_buffered)
     except Exception as e:
-        await bot.send_message(message.chat.id, f"Exception: `{';'.join(e.args)}`", parse_mode=ParseMode.MARKDOWN_V2)
-    await bot.send_message(
-        message.chat.id, "Для генерации нового файла нажмите `/start`", parse_mode=ParseMode.MARKDOWN_V2
-    )
-    await state.clear()
+        logger.error(e)
+        await bot.send_message(message.chat.id, "Произошла ошибка")
+    else:
+        await bot.send_message(
+            message.chat.id, "Для генерации нового файла нажмите /start"
+        )
+    finally:
+        await state.clear()
 
 
 async def generate_pdf(data):
     logger.info(f"data: {data}")
-    tmp_file = tempfile.TemporaryFile()
+
     project_path = pathlib.Path(__file__).parent
+    document_name = f"Счет-договор на поставку товара № {data['contract_number']}"
+    tmp_file = tempfile.NamedTemporaryFile(delete=False)
     tmp_file.write(
         project_path.joinpath(
             "pdf/invoice_28955336.pdf"
         ).read_bytes()
     )
     tmp_file.seek(0)
+
     c = canvas.Canvas(filename=tmp_file, pagesize=A4)
     width, height = A4
 
@@ -239,7 +233,7 @@ async def generate_pdf(data):
     c.drawString(
         10 * mm,
         height - 55 * mm,
-        f"Счет-договор на поставку товара № {data['contract_number']}",
+        document_name,
     )
     c.drawString(10 * mm, height - 60 * mm, "г. Москва")
 
@@ -564,6 +558,7 @@ async def generate_pdf(data):
     # Сохранение PDF
     c.showPage()
     c.save()
+    return document_name, tmp_file
 
 
 def split_text(text, length):

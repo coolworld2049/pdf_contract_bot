@@ -1,7 +1,8 @@
 import pytest
+from aiogram import types
 from loguru import logger
 
-from bot.__main__ import generate_pdf
+from bot.__main__ import generate_pdf, bot, settings
 
 
 @pytest.mark.asyncio
@@ -54,5 +55,7 @@ async def test_generate_pdf():
         },
     ]
     for i, item in enumerate(data):
+        doc_name, file = await generate_pdf(item)
+        file_buffered = types.FSInputFile(file.name, filename=f"{doc_name}.pdf")
+        await bot.send_document(settings.test_user_id, file_buffered)
         logger.debug(i)
-        await generate_pdf(item)

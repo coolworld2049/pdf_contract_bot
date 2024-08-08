@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="dockerize">
-      <change afterPath="$PROJECT_DIR$/bot/tests/test_generate_pdf.py" afterDir="false" />
+    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="add test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot/pdf/invoice_agreement_supply_of_goods_N_28955336.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bot/tests/test_generate_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/tests/test_generate_pdf.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +83,7 @@
     "Python tests.Python tests for test_generate_pdf.test_generate_pdf.executor": "Run",
     "Python.__main__.executor": "Run",
     "Python.loguru_logger.executor": "Run",
-    "Python.test_generate_pdf.executor": "Run",
+    "Python.test_generate_pdf.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "dev",
@@ -240,12 +237,21 @@
       <option name="project" value="LOCAL" />
       <updated>1723122111320</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add test">
+      <option name="closed" value="true" />
+      <created>1723124363310</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723124363310</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="dockerize" />
-    <option name="LAST_COMMIT_MESSAGE" value="dockerize" />
+    <MESSAGE value="add test" />
+    <option name="LAST_COMMIT_MESSAGE" value="add test" />
   </component>
 </project>
