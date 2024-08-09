@@ -18,17 +18,5 @@ class InterceptHandler(logging.Handler):
         )
 
 
-def configure_logging(logging_level: int, access_log_path: str) -> None:
+def configure_logging(logging_level: int) -> None:
     logging.basicConfig(handlers=[InterceptHandler()], level=logging_level)
-    logger.add(
-        access_log_path,
-        serialize=True,
-        level=logging_level,
-        enqueue=True,
-        backtrace=True,
-        diagnose=True,
-        encoding="UTF-8",
-        rotation="256 MB",
-        retention="7 days",
-        compression="zip",
-    )

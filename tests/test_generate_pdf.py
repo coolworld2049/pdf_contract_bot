@@ -2,13 +2,16 @@ import pytest
 from aiogram import types
 from loguru import logger
 
-from bot.__main__ import generate_pdf, bot, settings
+from bot.models import ContractFormData
+from bot.settings import settings, bot
+from bot.utils import generate_pdf
 
 
 @pytest.mark.asyncio
 async def test_generate_pdf():
     data = [
         {
+            "contract_name": "prostor",
             "date": "07.07.2024",
             "contract_number": "990178",
             "first_name": "Людмила",
@@ -24,6 +27,7 @@ async def test_generate_pdf():
             "sbp_bank": "РОСБАНК",
         },
         {
+            "contract_name": "stroytorgcomplect",
             "date": "asdf",
             "contract_number": "1234",
             "first_name": "asdf",
@@ -33,12 +37,13 @@ async def test_generate_pdf():
             "address": "1234",
             "ordered_item": "Станок Юпитер 7000 с полным комплектом насадок и дополнительным контроллером с массой до 50 кг.",
             "quantity": "2",
-            "cost": "122 990",
+            "cost": "122990",
             "sbp_phone": "1234",
             "sbp_full_name": "Афанасьева Ольга Алексеевна",
             "sbp_bank": "1234",
         },
         {
+            "contract_name": "stroytorgcomplect",
             "date": "10.07.2024",
             "contract_number": "900812",
             "first_name": "Сергей",
@@ -55,7 +60,7 @@ async def test_generate_pdf():
         },
     ]
     for i, item in enumerate(data):
-        doc_name, file = await generate_pdf(item)
+        doc_name, file = await generate_pdf(ContractFormData(**item), contract_name=item["contract_name"])
         file_buffered = types.FSInputFile(file.name, filename=f"{doc_name}.pdf")
         await bot.send_document(settings.test_user_id, file_buffered)
         logger.debug(i)
