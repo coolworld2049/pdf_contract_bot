@@ -26,12 +26,12 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "coolworld2049"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;coolworld2049&quot;
   }
-}]]></component>
+}</component>
   <component name="GitToolBoxStore">
     <option name="recentBranches">
       <RecentBranches>
@@ -57,35 +57,35 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/coolworld2049/pdf_contract_bot",
-    "accountId": "a15387f1-33ad-436f-bf81-d8c1c9e8b900"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/coolworld2049/pdf_contract_bot&quot;,
+    &quot;accountId&quot;: &quot;a15387f1-33ad-436f-bf81-d8c1c9e8b900&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2kNIIAdCCDdwvx9UA3zBfYD7ZFJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker-compose.yml.bot: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.redis: Compose Deployment.executor": "Run",
-    "Python tests.Python tests for test_generate_pdf.test_generate_pdf.executor": "Run",
-    "Python.__main__.executor": "Run",
-    "Python.loguru_logger.executor": "Run",
-    "Python.test_generate_pdf.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "dev",
-    "ignore.virus.scanning.warn.message": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.bot: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_generate_pdf.test_generate_pdf.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__main__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.loguru_logger.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generate_pdf.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\coolw\PycharmProjects\pdf_contract_bot\bot\pdf" />
@@ -140,7 +140,9 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml" />
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="docker-compose.yml.bot: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
@@ -185,10 +187,10 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.__main__" />
+      <item itemvalue="Python.test_generate_pdf" />
       <item itemvalue="Docker.docker-compose.yml.bot: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
-      <item itemvalue="Python.test_generate_pdf" />
-      <item itemvalue="Python.__main__" />
       <item itemvalue="Python tests.Python tests for test_generate_pdf.test_generate_pdf" />
     </list>
     <recent_temporary>

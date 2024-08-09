@@ -10,7 +10,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.redis import RedisStorage
-from aiogram.types import Message
+from aiogram.types import Message, BotCommand
 from loguru import logger
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from redis.asyncio import Redis
@@ -78,6 +78,12 @@ async def ask_next_state(
 @form_router.message(Command("start"))
 async def start_form(message: Message, state: FSMContext):
     await ask_next_state(message, state, Form.date, "Введите дату договора:")
+
+
+@form_router.message(Command("clear_context"))
+async def start_form(message: Message, state: FSMContext):
+    await state.clear()
+    await message.reply("Контекст очищен")
 
 
 @form_router.message(Form.date)
@@ -185,11 +191,7 @@ async def generate_pdf(data):
     project_path = pathlib.Path(__file__).parent
     document_name = f"Счет-договор на поставку товара № {data['contract_number']}"
     tmp_file = tempfile.NamedTemporaryFile(delete=False)
-    tmp_file.write(
-        project_path.joinpath(
-            "pdf/invoice_28955336.pdf"
-        ).read_bytes()
-    )
+    tmp_file.write(project_path.joinpath("pdf/invoice_28955336.pdf").read_bytes())
     tmp_file.seek(0)
 
     c = canvas.Canvas(filename=tmp_file, pagesize=A4)
@@ -579,6 +581,12 @@ def split_text(text, length):
 
 async def main():
     dp.include_router(form_router)
+    await bot.set_my_commands(
+        commands=[
+            BotCommand(command="/start", description="Start the bot"),
+            BotCommand(command="/clear_context", description="Cleat current context"),
+        ]
+    )
     await dp.start_polling(bot)
 
 
