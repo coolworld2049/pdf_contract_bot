@@ -32,6 +32,10 @@ async def ask_next_state(
     await message.answer(prompt)
 
 
+def fmt_number(v):
+    return f"{v:,}".replace(",", " ")
+
+
 async def generate_pdf(
     data: ContractFormData, contract_name: Literal["prostor", "stroytorgcomplect"]
 ):
@@ -137,18 +141,18 @@ async def generate_pdf(
 
     c.drawString(12 * mm, table_start_y - row_height + 2 * mm, "1")
     c.drawString(92 * mm, table_start_y - row_height + 2 * mm, "шт.")
-    c.drawString(112 * mm, table_start_y - row_height + 2 * mm, str(data.quantity))
+    c.drawString(112 * mm, table_start_y - row_height + 2 * mm, fmt_number(data.quantity))
 
     total_amount = data.quantity * data.cost
     c.drawString(
         132 * mm,
         table_start_y - row_height + 2 * mm,
-        str(data.cost),
+        fmt_number(data.cost),
     )
     c.drawString(
         162 * mm,
         table_start_y - row_height + 2 * mm,
-        str(total_amount),
+        fmt_number(total_amount),
     )
 
     # Итоговая сумма
@@ -156,14 +160,14 @@ async def generate_pdf(
     c.drawString(
         162 * mm,
         table_start_y - 3 * row_height + 15 * mm,
-        str(total_amount),
+        fmt_number(total_amount),
     )
 
     c.drawString(132 * mm, table_start_y - 3 * row_height + 5 * mm, "Всего к оплате")
     c.drawString(
         162 * mm,
         table_start_y - 3 * row_height + 5 * mm,
-        str(total_amount),
+        fmt_number(total_amount),
     )
 
     # Добавление данных покупателя
@@ -309,7 +313,7 @@ async def generate_pdf(
         1. Откройте приложение или личный кабинет Вашего банка.
         2. Выберите: «Платежи» → «СБП» (Система Быстрых Платежей).
         3. Укажите корпоративный номер компании: {data.sbp_phone}
-        4. Укажите сумму перевода: {data.quantity * data.cost} руб.
+        4. Укажите сумму перевода: {fmt_number(data.quantity * data.cost)} руб.
         5. Получатель: ООО «Простор», в лице главного бухгалтера: {data.sbp_full_name}
         6. Выберите банк: {data.sbp_bank}
         7. Выполните перевод.
