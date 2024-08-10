@@ -74,7 +74,7 @@ async def generate_pdf(
     c.drawString(
         10 * mm,
         height - 35 * mm,
-        company_data.legal_address,
+        f"Адрес: {company_data.legal_address}",
     )
 
     # Добавление номера договора и даты
@@ -226,7 +226,7 @@ async def generate_pdf(
     # ОГРН: 1197746047938
     # ИНН: 7728458381
     # Юр. адрес: 117279, город Москва, Профсоюзная ул., д. 97
-    # Центральный склад: 141895, Московская область\nГлазово деревня, 30, «PNK Парк Северное Шереметьево»
+    # Офис + склад: 141895, Московская область\nГлазово деревня, 30, «PNK Парк Северное Шереметьево»
     #     """
 
     c.drawString(10 * mm, 105 * mm, "Поставщик:")
@@ -238,7 +238,7 @@ async def generate_pdf(
     ОГРН: {company_data.ogrn}
     ИНН: {company_data.inn}
     Юр. адрес: {company_data.legal_address}
-    Центральный склад: {company_data.central_warehouse}
+    Офис + склад: {company_data.central_warehouse}
 
 
     __________________________/{contract.contract_executor_fio}/
@@ -330,7 +330,7 @@ async def generate_pdf(
     ОГРН: {company_data.ogrn}
     ИНН: {company_data.inn}
     Юр. адрес: {company_data.legal_address}
-    Центральный склад: {company_data.central_warehouse}
+    Офис + склад: {company_data.central_warehouse}
 
 
     __________________________/{contract.contract_executor_fio}/

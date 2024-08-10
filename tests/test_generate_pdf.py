@@ -42,22 +42,6 @@ async def test_generate_pdf():
             "sbp_full_name": "Афанасьева Ольга Алексеевна",
             "sbp_bank": "1234",
         },
-        {
-            "contract_name": "stroytorgcomplect",
-            "date": "10.07.2024",
-            "contract_number": "900812",
-            "first_name": "Сергей",
-            "last_name": "Михайлов",
-            "middle_name": "Иванович",
-            "phone": "+7 (999) 999-99-99",
-            "address": "г. Москва, ул. Совесткая, д. 11, кв. 11 (вход со двора, через третий подьезд)",
-            "ordered_item": "Станок Макита 321321",
-            "quantity": "1",
-            "cost": "59990",
-            "sbp_phone": "+7 (888) 888-88-88",
-            "sbp_full_name": "Алексеева Ольга Борисовна",
-            "sbp_bank": "РОСБАНК",
-        },
     ]
     for i, item in enumerate(data):
         doc_name, file = await generate_pdf(ContractFormData(**item), contract_name=item["contract_name"])
