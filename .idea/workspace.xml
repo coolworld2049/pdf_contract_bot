@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="fix contract fields">
+    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="fix numbers">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723278833257</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix numbers">
+      <option name="closed" value="true" />
+      <created>1723288208606</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1723288208606</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -218,6 +227,7 @@
     <MESSAGE value="fix cmd" />
     <MESSAGE value="del cmd" />
     <MESSAGE value="fix contract fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix contract fields" />
+    <MESSAGE value="fix numbers" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix numbers" />
   </component>
 </project>
