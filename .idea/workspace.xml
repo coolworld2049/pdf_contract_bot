@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="fix numbers">
+    <list default="true" id="161d4185-aee2-4b02-a71a-f8369014168a" name="Changes" comment="fix cp">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bot/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot/utils.py" afterDir="false" />
     </list>
@@ -110,6 +110,24 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="redis" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -215,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723288208606</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix cp">
+      <option name="closed" value="true" />
+      <created>1723289683605</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1723289683605</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -228,6 +254,7 @@
     <MESSAGE value="del cmd" />
     <MESSAGE value="fix contract fields" />
     <MESSAGE value="fix numbers" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix numbers" />
+    <MESSAGE value="fix cp" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix cp" />
   </component>
 </project>

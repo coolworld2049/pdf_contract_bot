@@ -284,7 +284,7 @@ async def generate_pdf(
     c.drawString(
         10 * mm,
         height - 35 * mm,
-        f"Юр. адрес: {company_data.legal_address}",
+        f"Юр. адрес: {company_data.central_warehouse}",
     )
 
     c.drawImage(
