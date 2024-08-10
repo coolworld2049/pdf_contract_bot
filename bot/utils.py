@@ -37,7 +37,7 @@ async def generate_pdf(
 ):
     contract = company_contract[contract_name]
     company_data = contract.company
-    document_name = f'{company_data.name}. Счет-договор на поставку товара № {data.contract_number}'
+    document_name = f'Счет-договор на поставку товара № {data.contract_number}'
 
     project_path = pathlib.Path(__file__).parent
     contract_path = project_path.joinpath(f"contracts/{contract_name}")
@@ -74,7 +74,7 @@ async def generate_pdf(
     c.drawString(
         10 * mm,
         height - 35 * mm,
-        f"Адрес: {company_data.legal_address}",
+        f"Адрес: {company_data.central_warehouse}",
     )
 
     # Добавление номера договора и даты
@@ -381,7 +381,8 @@ async def generate_pdf(
 
     c.showPage()
     c.save()
-    return document_name, tmp_file
+    file_name = f"{company_data.name}. {document_name}"
+    return file_name, tmp_file
 
 
 def split_text(text, length):
