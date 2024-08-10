@@ -37,7 +37,7 @@ async def start(message: Message, state: FSMContext):
     await message.answer(f"Меню\n{commands_text}")
 
 
-@form_router.message(Command("company_prostor"))
+# @form_router.message(Command("company_prostor"))
 @form_router.message(Command("company_stroytorgcomplect"))
 async def create_contract(message: Message, state: FSMContext):
     if "/company_" not in message.text:

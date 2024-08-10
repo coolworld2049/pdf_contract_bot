@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     def bot_commands(self):
         return [
             BotCommand(command="/start", description="Меню. Сбросить состояние"),
-            BotCommand(command="/company_prostor", description="ООО 'Простор'"),
+            # BotCommand(command="/company_prostor", description="ООО 'Простор'"),
             BotCommand(
                 command="/company_stroytorgcomplect", description="ООО 'Стройторгкомплект'"
             ),
